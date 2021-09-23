@@ -1,11 +1,18 @@
-hola esta es la lista de blog
+{% extends 'base.html' %}
+
+{% block content %}
+
+blog list
 <br>
 {% for post in posts %}
 <a href="{% url 'blog:detail' post.id%}"> {{post.title}} </a>
-<a href="{% url 'blog:update' post.id%}"> Update </a>
-<a href="{% url 'blog:delete' post.id%}"> Delete </a>
+<a class="text-green-400" href="{% url 'blog:update' post.id%}"> Update </a>
+<a class="text-red-500" href="{% url 'blog:delete' post.id%}"> Delete </a>
 
 {% endfor %}
 
 <br>
-<a href="{% url 'blog:create' %}">Create</a>
+<br>
+<a class="bg-blue-600 hover:bg-blue-900 text-white font-bold py-2 px-4 rounded" href="{% url 'blog:create' %}">Create</a>
+
+{% endblock content %}
