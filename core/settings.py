@@ -1,6 +1,7 @@
 from pathlib import Path
 import os
 import environ 
+import django_heroku
 
 env = environ.Env()
 environ.Env.read_env()
@@ -12,7 +13,7 @@ SECRET_KEY = os.environ.get('SECRET_KEY')
 
 DEBUG = os.environ.get('DEBUG')
 
-ALLOWED_HOSTS = ['*']
+ALLOWED_HOSTS = ['proyectoztr.herokuapp.com']
 
 
 # Application definition
@@ -72,14 +73,25 @@ WSGI_APPLICATION = 'core.wsgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases
-
+'''
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
         'NAME': BASE_DIR / 'db.sqlite3',
     }
 }
+'''
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'NAME': 'd6u4l6on4q255t' ,
+        'USER': 'lgqqkdlorjyyhy' ,
+        'PASSWORD': '29b2db57ea06eda449655b4bce38610b2fe44c49f3d0fe08a79096a2a9364025' ,
+        'HOST': 'ec2-3-231-40-72.compute-1.amazonaws.com' ,
+        'PORT': '5432' , 
 
+    }
+}
 
 # Password validation
 # https://docs.djangoproject.com/en/3.2/ref/settings/#auth-password-validators
@@ -117,7 +129,11 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.2/howto/static-files/
 
-STATIC_URL = '/static/'
+#STATIC_URL = '/static/'
+
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+STATIC_URL = "/static/"
+django_heroku.settings(locals())
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
